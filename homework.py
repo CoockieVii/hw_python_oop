@@ -16,6 +16,8 @@ class InfoMessage:
         self.calories = calories
 
     def get_message(self) -> str:
+        """Возвращает нформационное сообщение."""
+
         message = (f'Тип тренировки: {self.training_type}; '
                    f'Длительность: {self.duration:.3f} ч.; '
                    f'Дистанция: {self.distance:.3f} км; '
@@ -26,6 +28,7 @@ class InfoMessage:
 
 class Training(ABC):
     """Базовый класс тренировки."""
+
     M_IN_KM: float = 1000  # Константа
     LEN_STEP: float = 0.65  # Константа
 
@@ -39,11 +42,13 @@ class Training(ABC):
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
+
         distance = self.action * self.LEN_STEP / self.M_IN_KM
         return distance
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
+
         distance = self.get_distance()
         duration = self.duration
         mean_speed = distance / duration
@@ -51,10 +56,12 @@ class Training(ABC):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
+
         pass
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
+
         training_type = self.__class__.__name__
         duration = self.duration
         distance = self.get_distance()
@@ -74,6 +81,7 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
+
         coeff_calorie_1: float = 18
         coeff_calorie_2: float = 20
         mean_speed = self.get_mean_speed()
@@ -97,6 +105,7 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
+
         coeff_calorie_1: float = 0.035
         mean_speed = self.get_mean_speed()
         coeff_calorie_2: float = 0.029
@@ -112,7 +121,8 @@ class SportsWalking(Training):
 
 class Swimming(Training):
     """Тренировка: плавание."""
-    LEN_STEP: float = 1.38
+
+    LEN_STEP: float = 1.38  # Константа
 
     def __init__(self,
                  action: float,
@@ -125,6 +135,7 @@ class Swimming(Training):
         self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
+
         """Получить среднюю скорость движения."""
         length_pool = self.length_pool
         count_pool = self.count_pool
@@ -134,6 +145,7 @@ class Swimming(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
+
         mean_speed = self.get_mean_speed()
         coeff_calorie_1: float = 1.1
         coeff_calorie_2: float = 2
