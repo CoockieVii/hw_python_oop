@@ -113,9 +113,9 @@ class SportsWalking(Training):
         weight = self.weight
         duration = self.duration * 60  # время тренировки в минутах
         height = self.height
-        spent_calories = (coeff_calorie_1 * weight +
-                          (mean_speed ** coeff_calorie_3 // height) * coeff_calorie_2 * weight
-                          ) * duration
+        spent_calories = (coeff_calorie_1 * weight + (
+                mean_speed ** coeff_calorie_3 // height)
+                          * coeff_calorie_2 * weight) * duration
         return spent_calories
 
 
@@ -150,7 +150,8 @@ class Swimming(Training):
         coeff_calorie_1: float = 1.1
         coeff_calorie_2: float = 2
         weight = self.weight
-        spent_calories = (mean_speed + coeff_calorie_1) * coeff_calorie_2 * weight
+        spent_calories = (mean_speed
+                          + coeff_calorie_1) * coeff_calorie_2 * weight
         return spent_calories
 
 
