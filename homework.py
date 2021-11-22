@@ -135,8 +135,8 @@ class Swimming(Training):
         self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
-
         """Получить среднюю скорость движения."""
+
         length_pool = self.length_pool
         count_pool = self.count_pool
         duration = self.duration
@@ -156,6 +156,7 @@ class Swimming(Training):
 
 def read_package(_workout_type: str, _data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
+
     package_foo = {
         'SWM': Swimming,
         'RUN': Running,
@@ -167,6 +168,7 @@ def read_package(_workout_type: str, _data: list) -> Training:
 
 def main(_training: Training) -> None:
     """Главная функция."""
+
     info = _training.show_training_info()
     print(info.get_message())
 
