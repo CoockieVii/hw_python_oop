@@ -50,7 +50,8 @@ class Training:
 
     def get_spent_calories(self) -> float or Exception:
         """Получить количество затраченных калорий."""
-        raise NotImplementedError(type(self).__name__ + 'Функция не поддерживается')
+        raise NotImplementedError(type(self).__name__ +
+                                  'Функция не поддерживается')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -60,7 +61,8 @@ class Training:
         distance = self.get_distance()
         speed = self.get_mean_speed()
         calories = self.get_spent_calories()
-        return InfoMessage(training_type, duration, distance, speed, calories)
+        return InfoMessage(training_type, duration,
+                           distance, speed, calories)
 
 
 @dataclass
@@ -78,8 +80,9 @@ class Running(Training):
         mean_speed = self.get_mean_speed()
         weight = self.weight
         duration = self.duration * self.MIN_IN_HOUR
-        spent_calories = (self.COEFF_CALORIE_1 * mean_speed - self.COEFF_CALORIE_2
-                          ) * weight / self.M_IN_KM * duration
+        spent_calories = ((self.COEFF_CALORIE_1 *
+                           mean_speed - self.COEFF_CALORIE_2) *
+                          weight / self.M_IN_KM * duration)
         return spent_calories
 
 
@@ -135,8 +138,8 @@ class Swimming(Training):
 
         mean_speed = self.get_mean_speed()
         weight = self.weight
-        spent_calories = (mean_speed
-                          + self.COEFF_CALORIE_1) * self.COEFF_CALORIE_2 * weight
+        spent_calories = ((mean_speed + self.COEFF_CALORIE_1) *
+                          self.COEFF_CALORIE_2 * weight)
         return spent_calories
 
 
