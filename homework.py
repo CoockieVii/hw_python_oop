@@ -12,13 +12,14 @@ class InfoMessage:
     speed: float
     calories: float
 
-    def __post_init__(self):
-        """Возвращает информационное сообщение."""
-        self.get_message = (f'Тип тренировки: {self.training_type}; '
-                            f'Длительность: {self.duration:.3f} ч.; '
-                            f'Дистанция: {self.distance:.3f} км; '
-                            f'Ср. скорость: {self.speed:.3f} км/ч; '
-                            f'Потрачено ккал: {self.calories:.3f}.')
+    def get_message(self):
+        result = (f'Тип тренировки: {self.training_type}; '
+                  + f'Длительность: {self.duration:.3f} ч.; '
+                  + f'Дистанция: {self.distance:.3f} км; '
+                  + f'Ср. скорость: {self.speed:.3f} км/ч; '
+                  + f'Потрачено ккал: {self.calories:.3f}.')
+
+        return result
 
 
 @dataclass
@@ -28,11 +29,9 @@ class Training:
     action: float
     duration: float
     weight: float
-
-    def __post_init__(self):
-        self.M_IN_KM: ClassVar[float] = 1000
-        self.LEN_STEP: ClassVar[float] = 0.65
-        self.MIN_IN_HOUR: ClassVar[float] = 60
+    M_IN_KM: ClassVar[float] = 1000
+    LEN_STEP: ClassVar[float] = 0.65
+    MIN_IN_HOUR: ClassVar[float] = 60
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -68,11 +67,8 @@ class Training:
 @dataclass
 class Running(Training):
     """Тренировка: бег."""
-
-    def __post_init__(self):
-        super().__post_init__()
-        self.COEFF_CALORIE_1: ClassVar[float] = 18
-        self.COEFF_CALORIE_2: ClassVar[float] = 20
+    COEFF_CALORIE_1: ClassVar[float] = 18
+    COEFF_CALORIE_2: ClassVar[float] = 20
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
@@ -90,12 +86,9 @@ class Running(Training):
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
     height: float
-
-    def __post_init__(self):
-        super().__post_init__()
-        self.COEFF_CALORIE_1: ClassVar[float] = 0.035
-        self.COEFF_CALORIE_2: ClassVar[float] = 0.029
-        self.COEFF_CALORIE_3: ClassVar[float] = 2
+    COEFF_CALORIE_1: ClassVar[float] = 0.035
+    COEFF_CALORIE_2: ClassVar[float] = 0.029
+    COEFF_CALORIE_3: ClassVar[float] = 2
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
@@ -116,12 +109,9 @@ class Swimming(Training):
 
     length_pool: float
     count_pool: float
-
-    def __post_init__(self):
-        super().__post_init__()
-        self.LEN_STEP: ClassVar[float] = 1.38
-        self.COEFF_CALORIE_1: ClassVar[float] = 1.1
-        self.COEFF_CALORIE_2: ClassVar[float] = 2
+    LEN_STEP: ClassVar[float] = 1.38
+    COEFF_CALORIE_1: ClassVar[float] = 1.1
+    COEFF_CALORIE_2: ClassVar[float] = 2
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
@@ -160,7 +150,7 @@ def main(training: Training) -> None:
     """Главная функция."""
 
     info = training.show_training_info()
-    print(info.get_message)
+    print(info.get_message())
 
 
 if __name__ == '__main__':
