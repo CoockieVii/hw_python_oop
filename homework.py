@@ -14,10 +14,10 @@ class InfoMessage:
 
     def get_message(self):
         result = (f'Тип тренировки: {self.training_type}; '
-                  + f'Длительность: {self.duration:.3f} ч.; '
-                  + f'Дистанция: {self.distance:.3f} км; '
-                  + f'Ср. скорость: {self.speed:.3f} км/ч; '
-                  + f'Потрачено ккал: {self.calories:.3f}.')
+                  f'Длительность: {self.duration:.3f} ч.; '
+                  f'Дистанция: {self.distance:.3f} км; '
+                  f'Ср. скорость: {self.speed:.3f} км/ч; '
+                  f'Потрачено ккал: {self.calories:.3f}.')
 
         return result
 
@@ -141,7 +141,7 @@ def read_package(workout_type: str, data: list) -> Training:
         'WLK': SportsWalking
     }
     if workout_type not in package_training:
-        raise ValueError('Указанный тип тренировки не поддерживается')
+        raise ValueError(f'{workout_type} не поддерживается')
     result = package_training[workout_type](*data)
     return result
 
@@ -157,7 +157,7 @@ if __name__ == '__main__':
     packages = [
         ('SWM', [720, 1, 80, 25, 40]),
         ('RUN', [15000, 1, 75]),
-        ('WLK', [9000, 1, 75, 180])
+        ('WLK', [9000, 1, 75, 180]),
     ]
 
     for workout_type, data in packages:
